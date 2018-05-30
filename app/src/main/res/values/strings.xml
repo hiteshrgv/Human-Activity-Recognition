@@ -8,4 +8,8 @@
     <string name="standing">Standing</string>
     <string name="upstairs">Upstairs</string>
     <string name="walking">Walking</string>
+
+    <string name="title_activity_analysis">Analysis</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <!--<color name="colorPrimary">#ff9900</color>-->
+    <color name="colorPrimary">#25c</color>
+    <color name="lightColorPrimary">#2dff9900</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ff9900</color>
+    <color name="my_wonderful_blue_color">#4cb5ab</color>
+
+    <color name="light_color">#8cb811</color>
+    <color name="lightLight_color">#298cb811</color>
+    <color name="blue">#00c6d7</color>
+    <color name="lightBlue">#2600c6d7</color>
+    <color name="purple">#6e2585</color>
+    <color name="lightPurple">#276e2585</color>
+    <color name="whatsapp_color">#006c54</color>
+    <color name="inflatorbck">#8ad8ebf2</color>
+    <color name="red">#E65100</color>
+
+    <color name="lightwhatsapp_color">#1d006c54</color>
+    <color name="gray">#50667f</color>
+    <color name="lightgray">#2650667f</color>
+    <!--<color name="orange">#ff6600</color>-->
+    <color name="lightorange">#23ff6600</color>
+
+    <color name="light_black">#504f4f</color>
+    <color name="black">#000000</color>
+
+    <color name="pretty_blue">#25c</color>
+    <color name="backgroundDark">#565555</color>
+    <color name="universalBackground">#e3e3e3</color>
+    <color name="pretty_orange">#ff9900</color>
+
+
+
+    <color name="green">#04B404</color>
+    <color name="background_color">#C03F7FFF</color>
+    <color name="ch1_color">#FFFFFF00</color>
+    <color name="ch2_color">#000000</color>
+    <color name="button_disable">#000000</color>
+    <color name="button_enable">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="label_color">#FF3FFF3F</color>
+    <color name="timebase_color">#FFFF7F1F</color>
+    <color name="status_color">#FFFFFFFF</color>
+    <color name="select_color">#F78181</color>
+    <color name="headerColor">#154E90</color>
+
+    <color name="fulltransperent_bg">#80000000</color>
+    <color name="light_gray">#E3E5E8</color>
+    <color name="light_blue">#1F96C3</color>
+    <color name="table_header_blue">#0063BB</color>
+    <color name="table_scan_id">#288BCA</color>
+
+    <array name="dot_colors">
+        <item>#03A9F4</item>
+        <item>#E65100</item>
+        <item>#FFBB00</item>
+    </array>
+
 </resources>

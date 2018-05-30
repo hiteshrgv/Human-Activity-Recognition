@@ -1,17 +1,27 @@
-    package com.example.hiteshraghav.har;
+package com.example.hiteshraghav.har;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.speech.tts.TextToSpeech;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -42,18 +52,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getPermissions();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         x = new ArrayList<>();
         y = new ArrayList<>();
         z = new ArrayList<>();
 
-        downstairsTextView = (TextView) findViewById(R.id.downstairs_prob);
-        joggingTextView = (TextView) findViewById(R.id.jogging_prob);
-        sittingTextView = (TextView) findViewById(R.id.sitting_prob);
-        standingTextView = (TextView) findViewById(R.id.standing_prob);
-        upstairsTextView = (TextView) findViewById(R.id.upstairs_prob);
-        walkingTextView = (TextView) findViewById(R.id.walking_prob);
+        downstairsTextView = findViewById(R.id.downstairs_prob);
+        joggingTextView = findViewById(R.id.jogging_prob);
+        sittingTextView = findViewById(R.id.sitting_prob);
+        standingTextView = findViewById(R.id.standing_prob);
+        upstairsTextView = findViewById(R.id.upstairs_prob);
+        walkingTextView = findViewById(R.id.walking_prob);
+
+        Button analysis = findViewById(R.id.btn_anal);
+        analysis.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Analysis.class));
+            }
+        });
 
         classifier = new TensorFlowClassifier(getApplicationContext());
 
@@ -78,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                         max = results[i];
                     }
                 }
-
+                writeToFile("group11", labels[idx], results[idx]);
                 textToSpeech.speak(labels[idx], TextToSpeech.QUEUE_ADD, null, Integer.toString(new Random().nextInt()));
 
             }
@@ -150,5 +169,57 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         return (SensorManager) getSystemService(SENSOR_SERVICE);
     }
 
+    private void writeToFile(String userid, String activity, float confidence) {
+        String time = new Timestamp(System.currentTimeMillis()).toString();
+        String data = time + ", " + userid + ", " + activity + ", " + String.valueOf(confidence) + "\n" ;
+
+        File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Activity Recognition");
+
+        boolean createdDirectories = false;
+        if (!folder.exists())
+            createdDirectories = folder.mkdirs();
+
+        Log.i("DIRECTORIES", "Directories create: " + createdDirectories);
+
+        String filename = folder.toString() + "/Log.csv" ;
+        if (isExternalStorageWritable()){
+            try{
+                FileWriter fileWriter = new FileWriter(filename, true);
+                PrintWriter printWriter = new PrintWriter(fileWriter);
+                printWriter.append(data);
+                printWriter.flush();
+                fileWriter.close();
+                Log.i("DATA", "Written: " + data);
+            }catch (Exception e) {
+                Log.e("Exception", e.toString());
+
+            }
+        }
+        else {
+            Log.e("DIRECTORIES", "Media not accessible.");
+        }
+    }
+
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        return (Environment.MEDIA_MOUNTED.equals(state));
+    }
+
+    public void getPermissions() {
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                ActivityCompat.requestPermissions(
+                        MainActivity.this,
+                        new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        1
+                );
+            }
+        }
+        Log.i("PERMISSIONS", "Storage permissions taken");
+    }
 }
 
