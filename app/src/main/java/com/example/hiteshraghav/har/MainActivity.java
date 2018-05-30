@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     }
                 }
                 writeToFile("group11", labels[idx], results[idx]);
+
                 textToSpeech.speak(labels[idx], TextToSpeech.QUEUE_ADD, null, Integer.toString(new Random().nextInt()));
 
             }

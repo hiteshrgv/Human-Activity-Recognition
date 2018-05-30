@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Log"
+        android:textSize="30sp"
+        android:textColor="@color/colorPrimary"
+        android:background="@color/my_wonderful_blue_color"
+        android:gravity="center"
+        android:id="@+id/textLog"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/table1">
+            <TableRow
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginVertical="5dp">
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_margin="5dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="Timestamp"
+                    android:textAlignment="center"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textSize="20sp"
+                    android:background="@drawable/cell_shape"/>
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_margin="5dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="Activity"
+                    android:textAlignment="center"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textSize="20sp"
+                    android:background="@drawable/cell_shape"/>
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+</LinearLayout>

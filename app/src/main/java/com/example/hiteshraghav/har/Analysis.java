@@ -27,8 +27,7 @@ public class Analysis extends AppCompatActivity {
         setContentView(R.layout.activity_analysis);
 
         String Userid = "group11";
-        String[] activities = { "WALKING", "DOWNSTAIRS", "JOGGING", "UPSTAIRS","SITTING" ,"STANDING"};
-
+        String[] activities = { "WALKING", "DOWNSTAIRS", "JOGGING", "UPSTAIRS","SITTING" };
         File folder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/Activity Recognition");
         if (!folder.exists()){
             Toast.makeText(getApplicationContext(), "Activity Recognition folder not found.", Toast.LENGTH_LONG).show();
